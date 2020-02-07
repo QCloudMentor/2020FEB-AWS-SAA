@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <link href="./css/font-awesome.min.css" rel="stylesheet">
+         <link href="./css/bootstrap.min.css" rel="stylesheet">
+         <script>
+             function callAwsLambdaFunction() {
+
+                 var apiEndpoint = "https://clpzv90u7f.execute-api.us-west-2.amazonaws.com/api/"               
+                 var xhttp = new XMLHttpRequest();
+                 xhttp.open("POST", apiEndpoint);
+                 xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+                 //alert(document.getElementById("Url").value);
+                 //alert(document.getElementById("shorten_url").value);
+
+                 xhttp.onreadystatechange = function() {
+                     if (this.readyState == 4 && this.status == 200) {
+                         document.getElementById("shorten_url").value = JSON.parse(this.responseText);
+                         //document.getElementById("shorten_url").value = this.responseText;
+                     }
+                 };
+                 xhttp.send(JSON.stringify({ "Url": document.getElementById("Url").value }));
+             }
+        </script>   
+      </head>
+      <body>
+         <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+               <div class="navbar-header">
+                  <a class="navbar-brand" href="#">URL Shortener for AWS SAA</a>
+               </div>
+               <div id="navbar" class="navbar-collapse collapse">
+               </div>
+               <!--/.navbar-collapse -->
+            </div>
+         </nav>
+         <div class="jumbotron">
+            <div class="container">
+               <br>
+               
+
+               <div class="row">
+                  <div>
+                     
+                     <!--<form method="post" class="navbar-form navbar-left" action="">-->
+                        <h4>Enter URL to shorten.</h4>
+                           <input type="text" id="Url" name="Url" style="width:1200px" class="form-control input-lg chat-input" placeholder="URL">
+<!--
+                           <button type="submit" class="btn btn-lg btn-info">Submit</button>
+                        -->
+                        <h4>Enjoy, your shortened URL is: </h4>
+                  <input type="text" id="shorten_url" name="shorten_url" style="width:1200px" class="form-control input-lg chat-input" placeholder="Wait for the result....." value=""> 
+                  
+                  <br>
+                  <button class="btn btn-lg btn-info" onclick="callAwsLambdaFunction()">Click me!</button><br>
+
+
+
+                     <!--</form>-->
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <span>
+            <img width="300" height="180" src="./image/url-shortener-1.jpg" alt="">
+         </span>
+         <span>
+               <img width="300" height="180" src="./image/url-shortener-2.png" alt="">
+         </span>
+
+         <footer>
+         </footer>
+</body>
+</html>

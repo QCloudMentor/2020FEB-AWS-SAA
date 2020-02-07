@@ -1,0 +1,39 @@
+---
+swagger: "2.0"
+info:
+  version: "2019-02-28T08:44:08Z"
+  title: "TinyURL"
+host: "53cn7rxoqg.execute-api.us-west-2.amazonaws.com"
+basePath: "/s"
+schemes:
+- "https"
+paths:
+  /:
+    post:
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+    x-amazon-apigateway-any-method:
+      consumes:
+      - "application/json"
+      responses:
+        405:
+          description: "405 response"
+  /{proxy+}:
+    x-amazon-apigateway-any-method:
+      produces:
+      - "application/json"
+      parameters:
+      - name: "proxy"
+        in: "path"
+        required: true
+        type: "string"
+      responses: {}
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
